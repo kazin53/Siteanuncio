@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Como Criar Sua Conta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .step-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .demo-form {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="min-h-screen gradient-bg">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
+                Como Criar Sua Conta
+            </h1>
+            <p class="text-xl text-white/90 max-w-2xl mx-auto">
+                Siga estes passos simples para criar sua conta e começar a usar nossa plataforma
+            </p>
+        </div>
+
+        <!-- Steps Section -->
+        <div class="max-w-4xl mx-auto mb-12">
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="step-card bg-white rounded-2xl p-8 shadow-lg">
+                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <span class="text-2xl font-bold text-white">1</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4 text-center">Nome Completo</h3>
+                    <p class="text-gray-600 text-center mb-4">
+                        Digite seu nome completo como aparece em seus documentos oficiais
+                    </p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-700">
+                            <strong>Exemplo:</strong> João Silva Santos
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step-card bg-white rounded-2xl p-8 shadow-lg">
+                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <span class="text-2xl font-bold text-white">2</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4 text-center">E-mail</h3>
+                    <p class="text-gray-600 text-center mb-4">
+                        Use um e-mail válido que você acessa regularmente
+                    </p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-700">
+                            <strong>Exemplo:</strong> joao@email.com
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="step-card bg-white rounded-2xl p-8 shadow-lg">
+                    <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <span class="text-2xl font-bold text-white">3</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4 text-center">Senha Segura</h3>
+                    <p class="text-gray-600 text-center mb-4">
+                        Crie uma senha forte com pelo menos 8 caracteres
+                    </p>
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <p class="text-sm text-gray-700">
+                            <strong>Inclua:</strong> Letras, números e símbolos
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Demo Form -->
+        <div class="max-w-md mx-auto demo-form rounded-2xl p-8 shadow-2xl mb-12">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Formulário de Exemplo</h2>
+            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-6">
+                <p class="text-sm text-yellow-800 text-center">
+                    ⚠️ <strong>DEMO:</strong> Este é apenas um exemplo visual
+                </p>
+            </div>
+            
+            <form class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Nome Completo *
+                    </label>
+                    <input 
+                        type="text" 
+                        placeholder="Digite seu nome completo"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                        disabled
+                    >
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        E-mail *
+                    </label>
+                    <input 
+                        type="email" 
+                        placeholder="seu@email.com"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                        disabled
+                    >
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Senha *
+                    </label>
+                    <input 
+                        type="password" 
+                        placeholder="Mínimo 8 caracteres"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                        disabled
+                    >
+                </div>
+
+                <button 
+                    type="button" 
+                    class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-200 cursor-not-allowed opacity-75"
+                    disabled
+                >
+                    Criar Conta (Demo)
+                </button>
+            </form>
+        </div>
+
+        <!-- Tips Section -->
+        <div class="max-w-3xl mx-auto">
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
+                <h2 class="text-2xl font-semibold text-white mb-6 text-center">Dicas Importantes</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white/20 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-white mb-3">✅ Faça</h3>
+                        <ul class="text-white/90 space-y-2 text-sm">
+                            <li>• Use seu nome real</li>
+                            <li>• Escolha um e-mail que você acessa</li>
+                            <li>• Crie uma senha única e forte</li>
+                            <li>• Anote sua senha em local seguro</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white/20 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-white mb-3">❌ Evite</h3>
+                        <ul class="text-white/90 space-y-2 text-sm">
+                            <li>• Usar nomes falsos</li>
+                            <li>• E-mails temporários</li>
+                            <li>• Senhas muito simples</li>
+                            <li>• Compartilhar suas credenciais</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-12">
+            <p class="text-white/80">
+                Precisa de ajuda? Entre em contato com nosso suporte
+            </p>
+        </div>
+    </div>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9647c48932282493',t:'MTc1MzQwNTcyMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
