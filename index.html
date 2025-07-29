@@ -1539,7 +1539,7 @@
                 loadingOverlay.addEventListener('transitionend', () => {
                     loadingOverlay.style.display = 'none';
                 }, { once: true });
-            }, 3000); // 3000 milissegundos = 3 segundos
+            }, 7000); // 3000 milissegundos = 3 segundos
 
             // Verifica o estado de login ao carregar a página
             const isLoggedInStored = localStorage.getItem('adwealth_logged_in') === 'true';
