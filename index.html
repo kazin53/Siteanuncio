@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdWealth - Ganhe Dinheiro Assistindo Anúncios</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Variáveis CSS - Paleta de Cores e Fontes */
+        :root {
+            --primary: #6c5ce7; /* Roxo principal */
+            --secondary: #a29bfe; /* Azul claro secundário */
+            --primary-dark: #5c4cd9; /* Roxo mais escuro para hover */
+            --dark: #2d3436; /* Texto escuro */
+            --darker: #1a1e20; /* Fundo do footer */
+            --light: #f0f2f5; /* Fundo claro da página */
+            --light-alt: #ffffff; /* Fundo de cards e modais */
+            --text-muted: #6b7280; /* Texto secundário, parágrafos */
+            --success: #00b894; /* Cor de sucesso */
+            --warning: #fdcb6e; /* Cor de aviso */
+            --danger: #d63031; /* Cor de erro */
+            --border-color: #e2e8f0; /* Cor da borda */
+
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+        
+        /* Reset Básico e Estilos Globais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden; /* Evita scroll horizontal */
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 25px;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary);
+        }
+        a:hover {
+            color: var(--primary-dark);
+        }
+
+        /* Botões Gerais */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--light-alt);
+            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.2);
+        }
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(108, 92, 231, 0.3);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        .btn-secondary:hover {
+            background-color: var(--primary);
+            color: var(--light-alt);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(108, 92, 231, 0.2);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Seções */
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+        
+        .section-title h2 {
+            font-family: var(--font-heading);
+            font-size: 42px;
+            color: var(--dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 5px;
+        }
+        
+        .section-title p {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Header */
+        header {
+            background: var(--light-alt);
+            padding: 15px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            color: var(--primary);
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 32px;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 35px;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 200px 0 120px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--light-alt) 0%, var(--light) 100%);
+            overflow: hidden; /* Para garantir que as formas não transbordem */
+            position: relative;
+        }
+
+        .hero::before, .hero::after {
+            content: '';
+            position: absolute;
+            background: var(--secondary);
+            opacity: 0.1;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero::before {
+            width: 300px;
+            height: 300px;
+            top: -50px;
+            left: -50px;
+            animation: moveShape 10s infinite alternate ease-in-out;
+        }
+
+        .hero::after {
+            width: 400px;
+            height: 400px;
+            bottom: -100px;
+            right: -100px;
+            animation: moveShape 12s infinite alternate-reverse ease-in-out;
+        }
+
+        @keyframes moveShape {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(20px, 20px) scale(1.05); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+        
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: 58px;
+            margin-bottom: 25px;
+            color: var(--dark);
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 22px;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            color: var(--text-muted);
+        }
+        
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+        
+        /* Como Funciona */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+        
+        .step {
+            background-color: var(--light-alt);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer; /* Add cursor pointer to indicate it's clickable */
+        }
+        
+        .step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease-out;
+        }
+        .step:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .step:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+        
+        .step-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--light-alt);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 38px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .step h3 {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .step p {
+            font-size: 16px;
+            color: var(--text-muted);
+        }
+
+        /* Ad Player */
+        .ad-player {
+            background-color: var(--darker);
+            color: var(--light-alt);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .ad-player .section-title h2,
+        .ad-player .section-title p {
+            color: var(--light-alt);
+        }
+        .ad-player .section-title h2::after {
+            background: var(--secondary);
+        }
+        
+        .player-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--dark);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .player-container h2 {
+            font-family: var(--font-heading);
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: var(--light-alt);
+        }
+        .player-container p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+        
+        .video-placeholder {
+            width: 100%;
+            aspect-ratio: 16 / 9; /* Mantém proporção de vídeo */
+            background-color: #1e2224;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .video-placeholder i {
+            font-size: 70px;
+            color: #636e72;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .video-placeholder.playing i {
+            transform: scale(0.8);
+            opacity: 0.5;
+        }
+        .video-placeholder.completed i {
+            color: var(--success);
+            transform: scale(1.1);
+        }
+        
+        .timer {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(0,0,0,0.6);
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--light-alt);
+            min-width: 70px;
+            text-align: center;
+        }
+        
+        .earnings-display {
+            background-color: var(--success);
+            padding: 18px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--light-alt);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .earnings-display i {
+            font-size: 20px;
+        }
+        
+        .progress-container {
+            width: 100%;
+            height: 12px;
+            background-color: #1e2224;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 6px;
+        }
+
+        /* Dashboard Stats */
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .stats-card {
+            background-color: var(--light-alt);
+            border-radius: 15px;
+            padding: 35px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            text-align: left;
+            border-left: 5px solid var(--primary);
+        }
+        
+        .stats-card h3 {
+            font-family: var(--font-heading);
+            margin-bottom: 15px;
+            color: var(--text-muted);
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .stats-card h3 i {
+            color: var(--primary);
+        }
+        
+        .stats-card .amount {
+            font-family: var(--font-heading);
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        /* Testimonials Section */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background-color: var(--light-alt);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .testimonial-card .quote {
+            font-size: 17px;
+            color: var(--dark);
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .testimonial-card .author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .testimonial-card .author img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+        }
+
+        .testimonial-card .author-info strong {
+            display: block;
+            font-size: 18px;
+            color: var(--dark);
+        }
+
+        .testimonial-card .author-info span {
+            font-size: 15px;
+            color: var(--text-muted);
+        }
+        
+        /* FAQ Section */
+        .faq-grid {
+            display: grid;
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background-color: var(--light-alt);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px 25px;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background-color: var(--light);
+        }
+
+        .faq-question i {
+            font-size: 20px;
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            padding: 0 25px;
+            font-size: 16px;
+            color: var(--text-muted);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px; /* Ajuste conforme o conteúdo máximo esperado */
+            padding-bottom: 20px;
+        }
+
+
+        /* Footer */
+        footer {
+            background-color: var(--darker);
+            color: var(--light-alt);
+            padding: 80px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-column h3 {
+            font-family: var(--font-heading);
+            margin-bottom: 25px;
+            font-size: 20px;
+            color: var(--secondary);
+        }
+        
+        .footer-column .logo {
+            margin-bottom: 20px;
+            color: var(--light-alt);
+        }
+        .footer-column .logo i {
+            color: var(--secondary);
+        }
+        
+        .footer-column p {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--light-alt);
+        }
+        .footer-column ul li i {
+            font-size: 15px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .social-links a {
+            color: var(--light-alt);
+            background-color: rgba(255,255,255,0.1);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Modal de Autenticação */
+        .modal {
+            display: none; /* Oculto por padrão */
+            position: fixed;
+            z-index: 1001; /* Acima de tudo */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6); /* Fundo escuro */
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            background-color: var(--light-alt);
+            margin: auto;
+            padding: 40px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .modal.show .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .close-button {
+            color: var(--text-muted);
+            font-size: 30px;
+            font-weight: bold;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: var(--danger);
+        }
+
+        .modal-content h3 {
+            font-family: var(--font-heading);
+            font-size: 28px;
+            margin-bottom: 25px;
+            text-align: center;
+            color: var(--dark);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-group input[type="email"],
+        .form-group input[type="password"],
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            color: var(--dark);
+            background-color: var(--light);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input[type="email"]:focus,
+        .form-group input[type="password"]:focus,
+        .form-group input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+        }
+
+        .modal-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .modal-footer p {
+            font-size: 15px;
+            color: var(--text-muted);
+        }
+
+        .modal-footer a {
+            font-weight: 600;
+        }
+
+        .modal-form .btn {
+            width: 100%;
+            margin-top: 10px;
+            padding: 14px 28px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none; /* Oculta links de navegação em telas menores para dar espaço ao menu hamburguer */
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+            .hero p {
+                font-size: 19px;
+            }
+            .section-title h2 {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 150px 0 80px;
+            }
+            .hero h1 {
+                font-size: 38px;
+            }
+            .hero p {
+                font-size: 17px;
+            }
+            .hero-btns {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .btn {
+                width: 80%; /* Botões do hero ocupam mais espaço */
+                margin: 0 auto;
+            }
+
+            .section {
+                padding: 70px 0;
+            }
+            .section-title {
+                margin-bottom: 50px;
+            }
+            .section-title h2 {
+                font-size: 30px;
+            }
+            .section-title p {
+                font-size: 16px;
+            }
+
+            .player-container {
+                padding: 30px;
+            }
+            .player-container h2 {
+                font-size: 26px;
+            }
+            .player-container p {
+                font-size: 16px;
+            }
+            .video-placeholder {
+                height: 250px;
+            }
+            .video-placeholder i {
+                font-size: 50px;
+            }
+            .earnings-display {
+                font-size: 16px;
+                padding: 15px;
+            }
+            .dashboard-stats {
+                grid-template-columns: 1fr; /* Uma coluna em telas muito pequenas */
+                margin-top: 40px;
+            }
+            .stats-card .amount {
+                font-size: 32px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+            .footer-column .logo, .footer-column p, .social-links {
+                justify-content: center;
+            }
+            .footer-column ul {
+                padding-left: 0;
+            }
+            .footer-column ul li a {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            .hero p {
+                font-size: 16px;
+            }
+            .btn {
+                width: 95%; /* Botões ainda maiores */
+            }
+            .container {
+                padding: 0 15px;
+            }
+            .logo {
+                font-size: 24px;
+            }
+            .logo i {
+                font-size: 28px;
+            }
+            .step {
+                padding: 30px;
+            }
+            .testimonial-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#hero" class="logo">
+                    <i class="fas fa-coins"></i>
+                    <span>AdWealth</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#hero">Início</a></li>
+                    <li><a href="#how-it-works">Como Funciona</a></li>
+                    <li><a href="#" id="nav-ganhos-btn">Ganhos</a></li>
+                    <li><a href="#testimonials">Depoimentos</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+                <a href="#" class="btn btn-primary" id="login-register-btn">Entrar</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="hero">
+        <div class="container">
+            <h1>Ganhe Dinheiro Assistindo Anúncios Simplesmente</h1>
+            <p>AdWealth conecta marcas a consumidores engajados, como você. Assista anúncios relevantes, acumule pontos e resgate-os em dinheiro via Pix, PayPal, ou em vales-presente.</p>
+            <div class="hero-btns">
+                <a href="#" class="btn btn-primary" id="start-earning-btn">Comece Agora Grátis</a>
+                <a href="#how-it-works" class="btn btn-secondary">Como Funciona?</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>É Simples Assim</h2>
+                <p>Nosso processo é descomplicado e projetado para você começar a ganhar em minutos.</p>
+            </div>
+            <div class="steps">
+                <div class="step" id="step-create-account">
+                    <div class="step-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h3>1. Crie Sua Conta</h3>
+                    <p>Um registro rápido e gratuito, sem complicação ou necessidade de dados de cartão. Leva menos de 1 minuto!</p>
+                </div>
+                <div class="step" id="step-watch-earn">
+                    <div class="step-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>2. Assista & Ganhe</h3>
+                    <p>Escolha anúncios curtos e de seu interesse. Cada visualização te recompensa com pontos valiosos.</p>
+                </div>
+                <div class="step" id="step-redeem-earnings">
+                    <div class="step-icon">
+                        <i class="fas fa-sack-dollar"></i>
+                    </div>
+                    <h3>3. Resgate Seus Ganhos</h3>
+                    <p>Acumule pontos e os converta em dinheiro real via Pix, PayPal ou em vouchers para suas lojas favoritas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ad-player" id="ad-player-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>player de anúncios "Demonstração"</h2>
+                <p>Assista aos anúncios disponíveis para começar a acumular pontos imediatamente!</p>
+            </div>
+            <div class="player-container">
+                <div class="video-placeholder">
+                    <i class="fas fa-play"></i>
+                    <div class="timer">0:00</div>
+                    </div>
+                
+                <div class="earnings-display">
+                    <i class="fas fa-money-bill-wave"></i> Você ganhará: <span class="amount">R$ 0,00</span> por este anúncio
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: 0%"></div>
+                </div>
+                
+                <button class="btn btn-primary" id="start-ad-btn">Iniciar Próximo Anúncio</button>
+            </div>
+            
+            <div class="dashboard-stats">
+                <div class="stats-card">
+                    <h3><i class="fas fa-chart-line"></i> Ganhos Hoje</h3>
+                    <div class="amount" id="earnings-today">R$ 0,00</div>
+                </div>
+                <div class="stats-card">
+                    <h3><i class="fas fa-calendar-alt"></i> Ganhos no Mês</h3>
+                    <div class="amount" id="earnings-month">R$ 0,00</div>
+                </div>
+                <div class="stats-card">
+                    <h3><i class="fas fa-wallet"></i> Total Ganho</h3>
+                    <div class="amount" id="total-earnings">R$ 0,00</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>O Que Nossos Usuários Dizem</h2>
+                <p>Histórias reais de pessoas que estão transformando seu tempo livre em renda extra com a AdWealth.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="quote">"Nunca imaginei que assistir a alguns anúncios por dia poderia realmente valer a pena! A AdWealth me surpreendeu, e o saque via Pix é super rápido."</p>
+                    <div class="author">
+                        <img src="https://via.placeholder.com/60/6c5ce7/ffffff?text=JM" alt="Foto de João M.">
+                        <div class="author-info">
+                            <strong>João M.</strong>
+                            <span>Estudante e Renda Extra</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="quote">"A interface é muito intuitiva, e os anúncios são realmente interessantes. Gosto da flexibilidade de ganhar onde e quando eu quiser."</p>
+                    <div class="author">
+                        <img src="https://via.placeholder.com/60/a29bfe/ffffff?text=AS" alt="Foto de Ana S.">
+                        <div class="author-info">
+                            <strong>Ana S.</strong>
+                            <span>Mãe e Dona de Casa</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="quote">"Excelente plataforma! Consegui um dinheiro extra para pagar pequenas contas e comprar o que queria. Recomendo para todos que buscam uma renda passiva."</p>
+                    <div class="author">
+                        <img src="https://via.placeholder.com/60/00b894/ffffff?text=RL" alt="Foto de Rafael L.">
+                        <div class="author-info">
+                            <strong>Rafael L.</strong>
+                            <span>Profissional Liberal</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Perguntas Frequentes (FAQ)</h2>
+                <p>Encontre respostas para as dúvidas mais comuns sobre como funciona o AdWealth e seus ganhos.</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Como posso começar a ganhar dinheiro?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>É simples! Primeiro, crie sua conta gratuita. Depois, acesse a seção de anúncios e comece a assistir. Cada anúncio assistido credita pontos em sua conta, que podem ser convertidos em dinheiro.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Quais são os métodos de saque disponíveis?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Atualmente, oferecemos opções de saque via Pix (para o Brasil), PayPal e diversos cartões presente de grandes varejistas. Estamos sempre buscando adicionar novas opções.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Existe um valor mínimo para sacar?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim, o valor mínimo para saque é de R$ 25,00. Isso nos ajuda a gerenciar os custos de transação e garantir que você receba um valor significativo.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Posso assistir anúncios em qualquer dispositivo?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim! A AdWealth é otimizada para funcionar perfeitamente em smartphones, tablets e computadores, permitindo que você ganhe de onde estiver.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <a href="#hero" class="logo">
+                        <i class="fas fa-coins"></i>
+                        <span>AdWealth</span>
+                    </a>
+                    <p>Sua plataforma para transformar tempo em dinheiro, conectando marcas a consumidores de forma inteligente e recompensadora.</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com/adwealth" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com/adwealth" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com/adwealth" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://linkedin.com/company/adwealth" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="#hero"><i class="fas fa-chevron-right"></i> Início</a></li>
+                        <li><a href="#how-it-works"><i class="fas fa-chevron-right"></i> Como Funciona</a></li>
+                        <li><a href="#" id="footer-ganhos-btn"><i class="fas fa-chevron-right"></i> Ganhos</a></li>
+                        <li><a href="#testimonials"><i class="fas fa-chevron-right"></i> Depoimentos</a></li>
+                        <li><a href="#faq"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#" id="terms-link"><i class="fas fa-chevron-right"></i> Termos de Serviço</a></li>
+                        <li><a href="indepolit.html" id="privacy-link"><i class="fas fa-chevron-right"></i> Política de Privacidade</a></li>
+                        <li><a href="#" id="cookies-link"><i class="fas fa-chevron-right"></i> Política de Cookies</a></li>
+                        <li><a href="#" id="dmca-link"><i class="fas fa-chevron-right"></i> DMCA</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li><a href="mailto:contato@adwealth.com"><i class="fas fa-envelope"></i> contato@adwealth.com</a></li>
+                        <li><a href="tel:+551112345678"><i class="fas fa-phone"></i> (11) 1234-5678</a></li>
+                        <li><a href="https://maps.app.goo.gl/YourGoogleMapsLink" target="_blank"><i class="fas fa-map-marker-alt"></i> Santa Izabel do Pará, Brasil</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2023 AdWealth. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">×</span>
+            <div id="loginForm">
+                <h3>Acesse sua Conta</h3>
+                <form class="modal-form">
+                    <div class="form-group">
+                        <label for="loginEmail">E-mail</label>
+                        <input type="email" id="loginEmail" placeholder="seuemail@exemplo.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Senha</label>
+                        <input type="password" id="loginPassword" placeholder="Sua senha" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Entrar</button>
+                </form>
+                <div class="modal-footer">
+                    <p>Não tem uma conta? <a href="#" id="showRegister">Cadastre-se aqui</a></p>
+                    <p><a href="#">Esqueci minha senha</a></p>
+                </div>
+            </div>
+            <div id="registerForm" style="display: none;">
+                <h3>Crie sua Conta Gratuita</h3>
+                <form class="modal-form">
+                    <div class="form-group">
+                        <label for="registerName">Nome Completo</label>
+                        <input type="text" id="registerName" placeholder="Seu nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">E-mail</label>
+                        <input type="email" id="registerEmail" placeholder="seuemail@exemplo.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Senha</label>
+                        <input type="password" id="registerPassword" placeholder="Crie uma senha segura" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                </form>
+                <div class="modal-footer">
+                    <p>Já tem uma conta? <a href="#" id="showLogin">Entrar</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
+        import {
+            getAuth,
+            createUserWithEmailAndPassword,
+            signInWithEmailAndPassword,
+            signOut,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+        // Importe os módulos do Firebase Realtime Database
+        import { getDatabase, ref, set, get, child, update } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-database.js";
+
+        // Sua configuração do Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyAFGJodpi8BG2SCulATIMMxvEhV3e7icD4", // <-- SUBSTITUA PELA SUA CHAVE DE API REAL DO FIREBASE
+            authDomain: "conectbanco.firebaseapp.com",
+            projectId: "conectbanco",
+            storageBucket: "conectbanco.firebasestorage.app",
+            messagingSenderId: "624572089836",
+            appId: "1:624572089836:web:536ff96a09915bc04c2cc9",
+            measurementId: "G-GHZ92CSSDE",
+            databaseURL: "https://conectbanco-default-rtdb.firebaseio.com" // Adicionado o databaseURL
+        };
+
+        // Inicialize o Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app); 
+        const auth = getAuth(app);
+        const db = getDatabase(app); // Inicialize o Realtime Database
+
+        let currentUser = null;
+        let userData = {
+            today: 0.00,
+            month: 0.00,
+            total: 0.00
+        };
+        const adValue = 0.50; // Valor por anúncio
+
+        // Função para formatar moeda
+        function formatCurrency(value) {
+            return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        // Função para atualizar o DOM com os dados do usuário
+        function updateEarningsDisplay() {
+            document.getElementById('earnings-today').textContent = formatCurrency(userData.today);
+            document.getElementById('earnings-month').textContent = formatCurrency(userData.month);
+            document.getElementById('total-earnings').textContent = formatCurrency(userData.total);
+            document.querySelector('.earnings-display .amount').textContent = formatCurrency(adValue);
+        }
+
+        // Função para salvar os dados no Firebase
+        function saveUserData(uid) {
+            if (!uid) return;
+            const updates = {};
+            updates['/users/' + uid + '/earnings/today'] = userData.today;
+            updates['/users/' + uid + '/earnings/month'] = userData.month;
+            updates['/users/' + uid + '/earnings/total'] = userData.total;
+            return update(ref(db), updates);
+        }
+
+        // Função para buscar os dados do Firebase
+        function loadUserData(uid) {
+            if (!uid) {
+                // Se não houver UID, zere os dados locais e atualize a tela
+                userData = { today: 0.00, month: 0.00, total: 0.00 };
+                updateEarningsDisplay();
+                return;
+            }
+            const userRef = ref(db, 'users/' + uid + '/earnings');
+            get(userRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    // Atualiza a variável local `userData` com os dados do Firebase
+                    userData.today = data.today || 0.00;
+                    userData.month = data.month || 0.00;
+                    userData.total = data.total || 0.00;
+                    console.log("Dados do usuário carregados:", userData);
+                } else {
+                    // Se o usuário é novo, inicializa os dados no Firebase
+                    console.log("Novo usuário, inicializando dados.");
+                    userData = { today: 0.00, month: 0.00, total: 0.00 };
+                    saveUserData(uid);
+                }
+                updateEarningsDisplay();
+            }).catch(error => {
+                console.error("Erro ao carregar dados do usuário:", error);
+            });
+        }
+
+        // --- Funções Firebase para Autenticação ---
+        async function handleRegister(email, password) {
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                console.log("Conta criada com sucesso:", userCredential.user.email);
+                alert("Cadastro realizado com sucesso! Bem-vindo(a) à AdWealth.");
+                // O onAuthStateChanged vai lidar com a atualização do UI e o redirecionamento
+            } catch (error) {
+                console.error("Erro no cadastro:", error.code, error.message);
+                alert("Erro ao cadastrar: " + error.message);
+            }
+        }
+
+        async function handleLogin(email, password) {
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                console.log("Login feito com sucesso:", userCredential.user.email);
+                alert("Login realizado com sucesso! Bem-vindo(a) de volta.");
+                // O onAuthStateChanged vai lidar com a atualização do UI e o redirecionamento
+            } catch (error) {
+                console.error("Erro no login:", error.code, error.message);
+                alert("Erro ao fazer login: " + error.message);
+            }
+        }
+
+        async function handleLogout() {
+            try {
+                await signOut(auth);
+                console.log("Usuário saiu!");
+                alert("Você saiu!");
+                // O onAuthStateChanged vai lidar com a atualização do UI
+            } catch (error) {
+                console.error("Erro ao sair:", error.message);
+                alert("Erro ao sair: " + error.message);
+            }
+        }
+
+        // Observa o estado de autenticação do Firebase
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+            const loginRegisterBtn = document.getElementById('login-register-btn');
+            const startEarningBtn = document.getElementById('start-earning-btn');
+
+            if (user) {
+                loginRegisterBtn.textContent = 'Meu Perfil';
+                startEarningBtn.textContent = 'Ir Para Ganhos';
+                document.getElementById('authModal').classList.remove('show');
+                loadUserData(user.uid); // Carrega os dados do usuário logado
+            } else {
+                loginRegisterBtn.textContent = 'Entrar';
+                startEarningBtn.textContent = 'Comece Agora Grátis';
+                loadUserData(null); // Zera os dados locais se não houver usuário logado
+            }
+        });
+
+        // --- Event Listeners ---
+
+        // Navegação suave para seções
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href.length > 1) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // --- Modal de Autenticação ---
+        const authModal = document.getElementById('authModal');
+        const loginRegisterBtn = document.getElementById('login-register-btn');
+        const closeButton = document.querySelector('.close-button');
+        const showRegisterLink = document.getElementById('showRegister');
+        const showLoginLink = document.getElementById('showLogin');
+        const loginFormDiv = document.getElementById('loginForm');
+        const registerFormDiv = document.getElementById('registerForm');
+        const startEarningBtn = document.getElementById('start-earning-btn');
+        const navGanhosBtn = document.getElementById('nav-ganhos-btn');
+        const footerGanhosBtn = document.getElementById('footer-ganhos-btn');
+
+        function openAuthModal(formType = 'login') {
+            authModal.classList.add('show');
+            if (formType === 'login') {
+                loginFormDiv.style.display = 'block';
+                registerFormDiv.style.display = 'none';
+            } else {
+                loginFormDiv.style.display = 'none';
+                registerFormDiv.style.display = 'block';
+            }
+        }
+
+        loginRegisterBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (currentUser) {
+                if (confirm("Você está logado. Deseja sair?")) {
+                    handleLogout();
+                } else {
+                    alert('Redirecionando para o Dashboard/Meu Perfil (funcionalidade futura).');
+                }
+            } else {
+                openAuthModal('login');
+            }
+        });
+
+        startEarningBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (currentUser) {
+                window.location.href = 'indexgn.html';
+            } else {
+                openAuthModal('register');
+            }
+        });
+
+        navGanhosBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (currentUser) {
+                window.location.href = 'indexgn.html';
+            } else {
+                openAuthModal('login');
+            }
+        });
+
+        footerGanhosBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (currentUser) {
+                window.location.href = 'indexgn.html';
+            } else {
+                openAuthModal('login');
+            }
+        });
+
+
+        closeButton.addEventListener('click', function() {
+            authModal.classList.remove('show');
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target == authModal) {
+                authModal.classList.remove('show');
+            }
+        });
+
+        showRegisterLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            loginFormDiv.style.display = 'none';
+            registerFormDiv.style.display = 'block';
+        });
+
+        showLoginLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            registerFormDiv.style.display = 'none';
+            loginFormDiv.style.display = 'block';
+        });
+
+        document.querySelector('#loginForm .modal-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            await handleLogin(email, password);
+            this.reset();
+        });
+
+        document.querySelector('#registerForm .modal-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            await handleRegister(email, password);
+            this.reset();
+        });
+
+        // --- Player de Anúncios (Simulação mais avançada) ---
+        const startAdBtn = document.getElementById('start-ad-btn');
+        const progressBar = document.querySelector('.progress-bar');
+        const timerDisplay = document.querySelector('.timer');
+        const videoPlaceholderIcon = document.querySelector('.video-placeholder i');
+        const videoPlaceholder = document.querySelector('.video-placeholder');
+
+        let adTimer = 0;
+        let currentAdDuration = 30;
+        let timerInterval = null;
+
+        function resetAdPlayer() {
+            clearInterval(timerInterval);
+            adTimer = 0;
+            progressBar.style.width = '0%';
+            timerDisplay.textContent = '0:00';
+            videoPlaceholderIcon.className = 'fas fa-play';
+            videoPlaceholder.classList.remove('playing', 'completed');
+            startAdBtn.textContent = 'Iniciar Próximo Anúncio';
+            startAdBtn.disabled = false;
+        }
+
+        startAdBtn.addEventListener('click', function() {
+            if (!currentUser) {
+                openAuthModal('login');
+                alert('Você precisa estar logado para assistir anúncios e ganhar dinheiro!');
+                return;
+            }
+
+            startAdBtn.disabled = true;
+            startAdBtn.textContent = 'Carregando Anúncio...';
+            videoPlaceholderIcon.className = 'fas fa-spinner fa-spin';
+
+            setTimeout(() => {
+                startAdBtn.textContent = 'Assistindo...';
+                videoPlaceholderIcon.className = 'fas fa-eye';
+                
+                currentAdDuration = Math.floor(Math.random() * (45 - 15 + 1)) + 15;
+                let timeLeft = currentAdDuration; // Variável local para o timer
+                timerDisplay.textContent = `0:${timeLeft < 10 ? '0' + timeLeft : timeLeft}`;
+                
+                timerInterval = setInterval(() => {
+                    adTimer++;
+                    timeLeft = currentAdDuration - adTimer;
+                    timerDisplay.textContent = `0:${timeLeft < 10 ? '0' + timeLeft : timeLeft}`;
+                    progressBar.style.width = `${(adTimer / currentAdDuration) * 100}%`;
+
+                    if (adTimer >= currentAdDuration) {
+                        clearInterval(timerInterval);
+                        startAdBtn.textContent = 'Anúncio Completo!';
+                        videoPlaceholderIcon.className = 'fas fa-check-circle';
+                        videoPlaceholder.classList.add('completed');
+                        videoPlaceholder.classList.remove('playing');
+
+                        // ATUALIZA OS DADOS DO USUÁRIO NO FIREBASE
+                        if (currentUser) {
+                            userData.today += adValue;
+                            userData.month += adValue;
+                            userData.total += adValue;
+                            saveUserData(currentUser.uid).then(() => {
+                                updateEarningsDisplay();
+                                alert(`Parabéns! Você ganhou ${formatCurrency(adValue)} por assistir este anúncio.`);
+                            }).catch(error => {
+                                console.error("Erro ao salvar ganhos:", error);
+                                alert("Ocorreu um erro ao salvar seus ganhos. Tente novamente.");
+                            });
+                        }
+                        
+                        setTimeout(resetAdPlayer, 2000);
+                    }
+                }, 1000);
+            }, 2000);
+        });
+
+        // --- FAQ Interativo ---
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const parentItem = this.closest('.faq-item');
+                parentItem.classList.toggle('active');
+            });
+        });
+
+        // --- Links Legais (Simulação de redirecionamento) ---
+        document.getElementById('terms-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Você será redirecionado para a página de Termos de Serviço (em desenvolvimento).');
+        });
+        document.getElementById('privacy-link').addEventListener('click', function(e) {
+            e.preventDefault(); // Mudei para preventDefault para evitar navegação inesperada
+            alert('Você será redirecionado para a página de Política de Privacidade (em desenvolvimento).');
+        });
+        document.getElementById('cookies-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Você será redirecionado para a página de Política de Cookies (em desenvolvimento).');
+        });
+        document.getElementById('dmca-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Você será redirecionado para a página de Política DMCA (em desenvolvimento).');
+        });
+
+        // --- Inicialização ---
+        document.addEventListener('DOMContentLoaded', () => {
+            updateEarningsDisplay();
+            resetAdPlayer();
+
+            document.getElementById('step-create-account').addEventListener('click', function() {
+                openAuthModal('register'); // Redirecionado para o modal de registro
+            });
+
+            document.getElementById('step-watch-earn').addEventListener('click', function() {
+                // Navega para a seção do player
+                document.getElementById('ad-player-section').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            document.getElementById('step-redeem-earnings').addEventListener('click', function() {
+                alert('Funcionalidade de resgate em desenvolvimento. Faça login para ver seus ganhos.');
+                // openAuthModal('login'); // Pode abrir o modal de login se preferir
+            });
+        });
+
+    </script>
+</body>
+</html>
