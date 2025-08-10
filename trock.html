@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troca de Pontos por Dinheiro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-shadow {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .success-animation {
+            animation: successPulse 0.6s ease-in-out;
+        }
+        
+        @keyframes successPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen py-8 px-4">
+    <div class="max-w-2xl mx-auto">
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-yellow-400 rounded-full mb-4">
+                <span class="text-2xl">💰</span>
+            </div>
+            <h1 class="text-3xl font-bold text-white mb-2">Troca de Pontos</h1>
+            <p class="text-white/80">Converta seus pontos em dinheiro real</p>
+        </div>
+
+        <div class="bg-white rounded-2xl card-shadow p-8 mb-6">
+            <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 mb-8">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm font-medium">Seus Pontos</p>
+                        <p class="text-3xl font-bold text-gray-800" id="currentPoints">2,500</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-gray-600 text-sm font-medium">Valor Disponível</p>
+                        <p class="text-2xl font-bold text-green-600" id="availableValue">R$ 2,50</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <label class="block text-gray-700 font-semibold mb-3">Quantos pontos deseja trocar?</label>
+                <div class="relative">
+                    <input 
+                        type="number" 
+                        id="pointsInput" 
+                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none text-lg font-medium"
+                        placeholder="Digite a quantidade de pontos"
+                        min="100"
+                        step="100"
+                    >
+                    <div class="absolute right-3 top-3 text-gray-400 font-medium">pontos</div>
+                </div>
+                
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <button onclick="setPoints(500)" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors">500</button>
+                    <button onclick="setPoints(1000)" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors">1.000</button>
+                    <button onclick="setPoints(2500)" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors">2.500</button>
+                    <button onclick="setPoints(5000)" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors">5.000</button>
+                </div>
+            </div>
+
+            <div class="bg-green-50 border-2 border-green-200 rounded-xl p-6 mb-8" id="conversionDisplay" style="display: none;">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-green-700 font-semibold">Você receberá:</p>
+                        <p class="text-3xl font-bold text-green-800" id="convertedValue">R$ 0,00</p>
+                    </div>
+                    <div class="text-green-600 text-4xl pulse-animation">💸</div>
+                </div>
+            </div>
+
+            <button 
+                id="exchangeBtn"
+                onclick="exchangePoints()"
+                class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                disabled
+            >
+                Trocar Pontos por Dinheiro
+            </button>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 mb-6">
+            <h3 class="text-white font-semibold mb-4 flex items-center">
+                <span class="mr-2">📊</span>
+                Taxa de Conversão
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-white/90">
+                <div class="text-center">
+                    <p class="font-bold text-lg">100 pontos</p>
+                    <p class="text-sm">= R$ 0,10</p>
+                </div>
+                <div class="text-center">
+                    <p class="font-bold text-lg">1.000 pontos</p>
+                    <p class="text-sm">= R$ 1,00</p>
+                </div>
+                <div class="text-center">
+                    <p class="font-bold text-lg">10.000 pontos</p>
+                    <p class="text-sm">= R$ 10,00</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="successModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50" style="display: none;">
+            <div class="bg-white rounded-2xl p-8 max-w-md mx-4 text-center success-animation">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-2xl">✅</span>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Troca Realizada!</h3>
+                <p class="text-gray-600 mb-6" id="successMessage">Seus pontos foram convertidos com sucesso!</p>
+                <button onclick="closeModal()" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-6 rounded-lg transition-colors">
+                    Continuar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPoints = 0; // Inicializa com 0, o valor será carregado do localStorage
+        
+        // Update available value display
+        function updateAvailableValue() {
+            const value = (currentPoints * 0.001).toFixed(2);
+            document.getElementById('availableValue').textContent = `R$ ${value.replace('.', ',')}`;
+        }
+        
+        // Set points in input
+        function setPoints(points) {
+            if (points <= currentPoints) {
+                document.getElementById('pointsInput').value = points;
+                calculateConversion();
+            }
+        }
+        
+        // Calculate conversion
+        function calculateConversion() {
+            const input = document.getElementById('pointsInput');
+            const points = parseInt(input.value) || 0;
+            const display = document.getElementById('conversionDisplay');
+            const convertedValue = document.getElementById('convertedValue');
+            const exchangeBtn = document.getElementById('exchangeBtn');
+            
+            if (points >= 100 && points <= currentPoints) {
+                const value = (points * 0.001).toFixed(2);
+                convertedValue.textContent = `R$ ${value.replace('.', ',')}`;
+                display.style.display = 'block';
+                exchangeBtn.disabled = false;
+            } else {
+                display.style.display = 'none';
+                exchangeBtn.disabled = true;
+            }
+            
+            // Validation messages
+            if (points > 0 && points < 100) {
+                input.setCustomValidity('Mínimo de 100 pontos para troca');
+            } else if (points > currentPoints) {
+                input.setCustomValidity('Você não tem pontos suficientes');
+            } else {
+                input.setCustomValidity('');
+            }
+        }
+        
+        // Exchange points
+        function exchangePoints() {
+            const points = parseInt(document.getElementById('pointsInput').value);
+            const value = (points * 0.001).toFixed(2);
+            
+            // Update current points
+            currentPoints -= points;
+            document.getElementById('currentPoints').textContent = currentPoints.toLocaleString('pt-BR');
+            updateAvailableValue();
+            
+            // Salva o novo saldo no localStorage para a página inicial
+            localStorage.setItem('currentBalance', (currentPoints * 0.001).toFixed(2));
+            
+            // Show success modal
+            document.getElementById('successMessage').textContent = 
+                `${points.toLocaleString('pt-BR')} pontos foram convertidos em R$ ${value.replace('.', ',')}`;
+            document.getElementById('successModal').style.display = 'flex';
+            
+            // Reset form
+            document.getElementById('pointsInput').value = '';
+            document.getElementById('conversionDisplay').style.display = 'none';
+            document.getElementById('exchangeBtn').disabled = true;
+        }
+        
+        // Close modal
+        function closeModal() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+        
+        // Event listeners
+        document.getElementById('pointsInput').addEventListener('input', calculateConversion);
+        document.getElementById('pointsInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !document.getElementById('exchangeBtn').disabled) {
+                exchangePoints();
+            }
+        });
+        
+        // Initialize - Carrega o saldo do localStorage ao iniciar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            const storedBalance = localStorage.getItem('currentBalance');
+            if (storedBalance) {
+                // Converte o valor em dinheiro para pontos (1 real = 1000 pontos)
+                currentPoints = parseFloat(storedBalance) * 1000;
+                document.getElementById('currentPoints').textContent = currentPoints.toLocaleString('pt-BR');
+            }
+            updateAvailableValue();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96cbc6d892025c5e',t:'MTc1NDc4OTkzOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
